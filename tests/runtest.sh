@@ -5,7 +5,7 @@ python -V
 gcc -v
 g++ -v
 
-for py in python2 python3; do
+for py in python3; do
 	cd $dir
 	rm -rf build && mkdir build && cd build && cmake ..
 	make

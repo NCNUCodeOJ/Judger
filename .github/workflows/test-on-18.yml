@@ -1,0 +1,17 @@
+name: test-on-18.04
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: [ "newnew" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: docker build -t judger-test -f tests/Dockerfile-18.04 .
+      - name: Test
+        run: docker run -v $PWD:/src judger-test /bin/bash -c "chmod +x tests/runtest.sh && ./tests/runtest.sh"
