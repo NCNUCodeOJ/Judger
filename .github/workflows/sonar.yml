@@ -37,7 +37,10 @@ jobs:
           unzip -o $HOME/.sonar/build-wrapper-linux-x86.zip -d $HOME/.sonar/
           echo "$HOME/.sonar/build-wrapper-linux-x86" >> $GITHUB_PATH
       - name: install dependency
-        run:  apt-get update && apt-get install -y cmake python python3 python3-pip libseccomp-dev gcc g++ strace && pip3 install setuptools --upgrade
+        run:  |
+          sudo apt-get update 
+          sudo apt-get install -y cmake python python3 python3-pip libseccomp-dev gcc g++ strace
+          pip3 install setuptools --upgrade
       - name: Run build-wrapper
         run: |
           build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake .
